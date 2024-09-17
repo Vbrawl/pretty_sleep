@@ -7,18 +7,19 @@ A prettier version for sleep, it displays the remaining time and the total sleep
 
 '''bash
 
+# Get source code
 git clone https://github.com/Vbrawl/pretty_sleep.git
 cd pretty_sleep
 
+# build
 cmake -B build
 cd build
 make
 
+# install
+sudo make install
+
 '''
-
-# Installation
-
-Currently there is no installation, you can simply out the binary somewhere in the $PATH
 
 
 # License
