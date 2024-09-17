@@ -8,6 +8,7 @@
 struct CommandArgs {
 	const char* prog_name;
 	bool help;
+	bool version;
 	bool quiet;
 	unsigned int ui_update_interval;
 	uint64_t sleep_for;

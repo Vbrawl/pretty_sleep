@@ -10,6 +10,7 @@
 int set_default_args(struct CommandArgs* args) {
 	args->prog_name = "<error>";
 	args->help = false;
+	args->version = false;
 	args->quiet = false;
 	args->ui_update_interval = 1;
 	args->sleep_for = 0;
@@ -23,7 +24,7 @@ bool parse_command_line_arguments(unsigned int argc, char** argv, struct Command
 	bool convert_success = false;
 
 	int opt;
-	while((opt = getopt(argc, argv, "hqi:")) != -1 && !error) {
+	while((opt = getopt(argc, argv, "hvqi:")) != -1 && !error) {
 		switch(opt) {
 		case 'q':
 			args->quiet = true;
@@ -36,6 +37,11 @@ bool parse_command_line_arguments(unsigned int argc, char** argv, struct Command
 				error = true;
 			} else { args->ui_update_interval = uint_val; }
 			break;
+
+		case 'v':
+			args->version = true;
+			break;
+
 		case 'h':
 			args->help = true;
 			break;
@@ -66,7 +72,15 @@ void print_help(struct CommandArgs* args) {
 		"\n"
 		"    -h             Display the help and exit\n"
 		"    -q             Quiet, don't display anything while sleeping\n"
-		"    -i INTERVAL    Set the interval between each interface update\n", args->prog_name);
+		"    -i INTERVAL    Set the interval between each interface update\n"
+		"    -v             Display version and exit\n", args->prog_name);
+}
+
+
+void print_version(struct CommandArgs* args) {
+	printf( "psleep (https://github.com/Vbrawl/pretty_sleep.git) %d.%d.%d\n"
+		"Copyright (C) 2024 Jim Konstantos <konstantosjim@gmail.com>\n"
+		"License: MIT\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
 }
 
 
@@ -105,6 +119,11 @@ int main(unsigned int argc, char** argv) {
 	if(args.help) {
 		print_help(&args);
 		return arg_status;
+	}
+
+	if(args.version) {
+		print_version(&args);
+		return 0;
 	}
 
 	pretty_sleep(&args);
