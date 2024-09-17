@@ -114,6 +114,8 @@ int main(unsigned int argc, char** argv) {
 	struct CommandArgs args;
 	set_default_args(&args);
 
+	if(argc >= 1) args.prog_name = argv[0];
+
 	bool arg_status = parse_command_line_arguments(argc, argv, &args);
 
 	if(args.help) {
