@@ -5,7 +5,7 @@ A prettier version for sleep, it displays the remaining time and the total sleep
 
 # Build From Source
 
-'''bash
+```bash
 
 # Get source code
 git clone https://github.com/Vbrawl/pretty_sleep.git
@@ -19,7 +19,7 @@ make
 # install
 sudo make install
 
-'''
+```
 
 
 # License
